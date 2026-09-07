@@ -54,7 +54,7 @@ export default function About() {
         >
           <div className="about-v2-image">
             <img
-              src="/logos/diogo-pinho.png"
+              src="/logos/pinho_linkedin.png"
               alt="Diogo Pinho, arquiteto"
             />
           </div>
