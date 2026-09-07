@@ -539,7 +539,7 @@ export default function Admin() {
                       {p.year} ·{" "}
                       {p.projectType === "collaboration"
                         ? "Colaboração"
-                        : "Projeto próprio"}
+                        : "Autoria"}
                       {p.category ? ` · ${p.category}` : ""}
                     </span>
                   </div>
@@ -604,7 +604,7 @@ export default function Admin() {
                           }))
                         }
                       >
-                        <option value="own">projeto próprio</option>
+                        <option value="own">Autoria</option>
                         <option value="collaboration">Colaboração</option>
                       </select>
                     </label>
