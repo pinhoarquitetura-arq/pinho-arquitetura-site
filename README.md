@@ -18,12 +18,12 @@ Abrir:
 `/admin`
 
 O protótipo permite:
-- criar, editar e apagar projectos;
+- criar, editar e apagar projetos;
 - editar título, localização, ano, categoria, estado e descrição;
-- definir projectos em destaque;
+- definir projetos em destaque;
 - gerir capa e galeria de imagens;
 - ordenar imagens da galeria;
-- editar a ficha do projecto;
+- editar a ficha do projeto;
 - gerir Drawings, Models, Credits e Featured on;
 - editar nome do atelier, textos e contactos.
 

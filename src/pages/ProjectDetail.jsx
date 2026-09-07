@@ -48,7 +48,7 @@ export default function ProjectDetail() {
   if (!project) {
     return (
       <section className="section-pad page-top">
-        <h1>Projecto não encontrado.</h1>
+        <h1>projeto não encontrado.</h1>
         <Link to="/projetos">Voltar</Link>
       </section>
     );
@@ -152,7 +152,7 @@ export default function ProjectDetail() {
 
       {project.credits?.length > 0 && (
         <section className="detail-info-section section-pad">
-          <h2>Credits</h2>
+          <h2>Créditos</h2>
           <div className="credits-list">
             {project.credits.map(([label, value], creditIndex) => (
               <div key={creditIndex}>
@@ -189,7 +189,7 @@ export default function ProjectDetail() {
 
       {next && (
         <section className="next-project section-pad">
-          <span>Projecto seguinte</span>
+          <span>projeto seguinte</span>
           <Link to={`/projetos/${next.id}`}>
             <h2>{next.title}</h2>
             <ArrowUpRight size={34} />

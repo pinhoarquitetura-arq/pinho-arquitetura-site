@@ -7,9 +7,9 @@ export const defaultContent = {
   settings: {
     tagline: "Arquitetura e interiores, do conceito à obra.",
     intro: "Criamos espaços claros, funcionais e pensados para serem vividos.",
-    contactHeading: "Um bom projecto começa por ouvir.",
+    contactHeading: "Um bom projeto começa por ouvir.",
     contactIntro:
-      "Conta-nos um pouco sobre o projecto. Respondemos assim que possível.",
+      "Conta-nos um pouco sobre o projeto. Respondemos assim que possível.",
     email: "",
     phone: "",
     address: "Aveiro, Portugal",
@@ -88,7 +88,7 @@ export async function loadContent() {
   const content = normaliseContent(data.content);
   const localContent = readLocalContent();
 
-  // Na primeira migração, permite recuperar os projectos que ainda estavam
+  // Na primeira migração, permite recuperar os projetos que ainda estavam
   // guardados no browser. Ao carregar em Guardar no Admin passam para o Supabase.
   if (!content.projects.length && localContent.projects.length) {
     return localContent;

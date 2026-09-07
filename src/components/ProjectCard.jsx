@@ -14,7 +14,7 @@ export function ProjectCard({ project, index = 0, large = false }) {
         <div className="project-image-wrap">
           <img src={project.cover} alt={project.title} className="project-image" />
           <div className="project-image-overlay" />
-          <span className="project-open">Ver projecto</span>
+          <span className="project-open">Ver projeto</span>
         </div>
         <div className="project-meta">
           <h2>{project.title}</h2>

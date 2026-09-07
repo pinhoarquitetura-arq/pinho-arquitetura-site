@@ -157,7 +157,7 @@ export default function Home() {
 
         <div>
           <h2>
-            Um projecto começa
+            Um projeto começa
             <br />
             com uma conversa.
           </h2>

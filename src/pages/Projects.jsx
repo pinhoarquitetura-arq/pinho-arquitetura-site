@@ -6,27 +6,36 @@ import { useContent } from "../hooks/useContent";
 const sections = [
   {
     value: "own",
-    label: "Projectos próprios",
-    description: "Projectos desenvolvidos integralmente pela Pinho Arquitetura.",
+    label: "Autoria",
+    description:
+      "Projetos de autoria da Pinho Arquitetura.",
   },
   {
     value: "collaboration",
     label: "Colaborações",
     description:
-      "Projectos desenvolvidos em colaboração com outros ateliers e arquitetos.",
+      "Projetos desenvolvidos em colaboração com outros ateliers e arquitetos.",
   },
 ];
 
 const getProjectType = (project) =>
-  project.projectType === "collaboration" ? "collaboration" : "own";
+  project.projectType === "collaboration"
+    ? "collaboration"
+    : "own";
 
 const getCategories = (content) => {
-  if (Array.isArray(content.categories) && content.categories.length) {
+  if (
+    Array.isArray(content.categories) &&
+    content.categories.length
+  ) {
     return content.categories.filter(Boolean);
   }
+
   return [
     ...new Set(
-      content.projects.map((project) => project.category).filter(Boolean),
+      content.projects
+        .map((project) => project.category)
+        .filter(Boolean),
     ),
   ];
 };
@@ -35,12 +44,17 @@ export default function Projects() {
   const { content, loading } = useContent();
   const [section, setSection] = useState("own");
   const [filter, setFilter] = useState("Todos");
-  const allCategories = useMemo(() => getCategories(content), [content]);
+
+  const allCategories = useMemo(
+    () => getCategories(content),
+    [content],
+  );
 
   const sectionProjects = useMemo(
     () =>
       content.projects.filter(
-        (project) => getProjectType(project) === section,
+        (project) =>
+          getProjectType(project) === section,
       ),
     [content.projects, section],
   );
@@ -48,36 +62,53 @@ export default function Projects() {
   const availableCategories = useMemo(
     () =>
       allCategories.filter((category) =>
-        sectionProjects.some((project) => project.category === category),
+        sectionProjects.some(
+          (project) =>
+            project.category === category,
+        ),
       ),
     [allCategories, sectionProjects],
   );
 
   const filters = ["Todos", ...availableCategories];
+
   const list = useMemo(
     () =>
       filter === "Todos"
         ? sectionProjects
-        : sectionProjects.filter((project) => project.category === filter),
+        : sectionProjects.filter(
+            (project) =>
+              project.category === filter,
+          ),
     [filter, sectionProjects],
   );
 
   const counts = useMemo(
     () => ({
       own: content.projects.filter(
-        (project) => getProjectType(project) === "own",
+        (project) =>
+          getProjectType(project) === "own",
       ).length,
+
       collaboration: content.projects.filter(
-        (project) => getProjectType(project) === "collaboration",
+        (project) =>
+          getProjectType(project) ===
+          "collaboration",
       ).length,
     }),
     [content.projects],
   );
 
-  const activeSection = sections.find((item) => item.value === section);
+  const activeSection =
+    sections.find(
+      (item) => item.value === section,
+    ) || sections[0];
 
   useEffect(() => {
-    if (filter !== "Todos" && !availableCategories.includes(filter)) {
+    if (
+      filter !== "Todos" &&
+      !availableCategories.includes(filter)
+    ) {
       setFilter("Todos");
     }
   }, [availableCategories, filter]);
@@ -96,21 +127,44 @@ export default function Projects() {
         >
           Projetos
         </motion.h1>
-        <p>{content.projects.length.toString().padStart(2, "0")} projetos</p>
+
+        <p>
+          {content.projects.length
+            .toString()
+            .padStart(2, "0")}{" "}
+          projetos
+        </p>
       </div>
 
-      <div className="project-type-tabs" role="tablist" aria-label="Tipo de projecto">
+      <div
+        className="project-type-tabs"
+        role="tablist"
+        aria-label="Tipo de projeto"
+      >
         {sections.map((item) => (
           <button
             key={item.value}
             type="button"
             role="tab"
-            aria-selected={section === item.value}
-            className={`project-type-tab ${section === item.value ? "active" : ""}`}
-            onClick={() => chooseSection(item.value)}
+            aria-selected={
+              section === item.value
+            }
+            className={`project-type-tab ${
+              section === item.value
+                ? "active"
+                : ""
+            }`}
+            onClick={() =>
+              chooseSection(item.value)
+            }
           >
             <span>{item.label}</span>
-            <small>{counts[item.value].toString().padStart(2, "0")}</small>
+
+            <small>
+              {counts[item.value]
+                .toString()
+                .padStart(2, "0")}
+            </small>
           </button>
         ))}
       </div>
@@ -132,8 +186,14 @@ export default function Projects() {
             <button
               type="button"
               key={category}
-              className={filter === category ? "active" : ""}
-              onClick={() => setFilter(category)}
+              className={
+                filter === category
+                  ? "active"
+                  : ""
+              }
+              onClick={() =>
+                setFilter(category)
+              }
             >
               {category}
             </button>
@@ -150,12 +210,18 @@ export default function Projects() {
           transition={{ duration: 0.35 }}
         >
           {list.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+            />
           ))}
         </motion.div>
       ) : !loading ? (
         <div className="projects-empty">
-          <span>Sem projectos publicados nesta secção.</span>
+          <span>
+            Sem projetos publicados nesta secção.
+          </span>
         </div>
       ) : null}
     </section>

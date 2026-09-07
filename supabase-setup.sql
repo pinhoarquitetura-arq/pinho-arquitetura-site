@@ -31,7 +31,7 @@ with check (true);
 insert into public.site_content (id, content)
 values (
   'main',
-  '{"settings":{"tagline":"Arquitetura e interiores, do conceito à obra.","intro":"Criamos espaços claros, funcionais e pensados para serem vividos.","contactHeading":"Um bom projecto começa por ouvir.","contactIntro":"Conta-nos um pouco sobre o projecto. Respondemos assim que possível.","email":"","phone":"","address":"Aveiro, Portugal","instagram":"","linkedin":"","website":"","footerNote":"Arquitetura e interiores, do conceito à obra."},"categories":[],"projects":[]}'::jsonb
+  '{"settings":{"tagline":"Arquitetura e interiores, do conceito à obra.","intro":"Criamos espaços claros, funcionais e pensados para serem vividos.","contactHeading":"Um bom projeto começa por ouvir.","contactIntro":"Conta-nos um pouco sobre o projeto. Respondemos assim que possível.","email":"","phone":"","address":"Aveiro, Portugal","instagram":"","linkedin":"","website":"","footerNote":"Arquitetura e interiores, do conceito à obra."},"categories":[],"projects":[]}'::jsonb
 )
 on conflict (id) do nothing;
 

@@ -60,7 +60,7 @@ const prepareContent = (raw) => {
       : projectCategories;
   next.projects = next.projects.map((project) => ({
     ...project,
-    // Os projectos antigos continuam válidos e entram como projectos próprios.
+    // Os projetos antigos continuam válidos e entram como projetos próprios.
     projectType:
       project.projectType === "collaboration" ? "collaboration" : "own",
     collaborationWith: project.collaborationWith || "",
@@ -209,10 +209,10 @@ export default function Admin() {
     }
   };
   const addProject = () => {
-    const id = `novo-projecto-${Date.now()}`;
+    const id = `novo-projeto-${Date.now()}`;
     const p = {
       id,
-      title: "Novo projecto",
+      title: "Novo projeto",
       location: "Aveiro, Portugal",
       year: new Date().getFullYear().toString(),
       category: content.categories[0] || "",
@@ -223,14 +223,14 @@ export default function Admin() {
       cover:
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=86",
       gallery: [],
-      description: "Descrição do projecto.",
+      description: "Descrição do projeto.",
       facts: [
         ["Tipologia", ""],
         ["Área", ""],
       ],
       drawings: [],
       models: [],
-      credits: [["Arquitectura", "Pinho Arquitetura"]],
+      credits: [["Arquitetura", "Pinho Arquitetura"]],
       featuredOn: [],
     };
     setContent((c) => ({ ...c, projects: [p, ...c.projects] }));
@@ -300,7 +300,7 @@ export default function Admin() {
       (item) => item.category === category,
     ).length;
     const message = projectsUsingCategory
-      ? `A categoria “${category}” está associada a ${projectsUsingCategory} projecto(s). Ao apagá-la, esses projectos ficam sem categoria. Continuar?`
+      ? `A categoria “${category}” está associada a ${projectsUsingCategory} projeto(s). Ao apagá-la, esses projetos ficam sem categoria. Continuar?`
       : `Apagar a categoria “${category}”?`;
     if (!confirm(message)) return;
 
@@ -524,7 +524,7 @@ export default function Admin() {
           <div className="admin-project-layout">
             <section className="admin-project-list">
               <button className="add-project" onClick={addProject}>
-                <Plus size={17} /> Novo projecto
+                <Plus size={17} /> Novo projeto
               </button>
               {content.projects.map((p) => (
                 <button
@@ -539,7 +539,7 @@ export default function Admin() {
                       {p.year} ·{" "}
                       {p.projectType === "collaboration"
                         ? "Colaboração"
-                        : "Projecto próprio"}
+                        : "Projeto próprio"}
                       {p.category ? ` · ${p.category}` : ""}
                     </span>
                   </div>
@@ -552,7 +552,7 @@ export default function Admin() {
                   <div className="editor-heading">
                     <h2>Informação principal</h2>
                     <button className="danger-link" onClick={delProject}>
-                      <Trash2 size={15} /> Apagar projecto
+                      <Trash2 size={15} /> Apagar projeto
                     </button>
                   </div>
                   <div className="form-grid two">
@@ -590,7 +590,7 @@ export default function Admin() {
                       />
                     </label>
                     <label>
-                      Tipo de projecto
+                      Tipo de projeto
                       <select
                         value={project.projectType || "own"}
                         onChange={(e) =>
@@ -604,7 +604,7 @@ export default function Admin() {
                           }))
                         }
                       >
-                        <option value="own">Projecto próprio</option>
+                        <option value="own">projeto próprio</option>
                         <option value="collaboration">Colaboração</option>
                       </select>
                     </label>
@@ -619,7 +619,7 @@ export default function Admin() {
                               collaborationWith: e.target.value,
                             }))
                           }
-                          placeholder="Ex.: Atelier X / Arquitecto Y"
+                          placeholder="Ex.: Atelier X / Arquiteto Y"
                         />
                       </label>
                     )}
@@ -781,7 +781,7 @@ export default function Admin() {
                   <div className="editor-section" key={key}>
                     <div className="editor-heading">
                       <h2>
-                        {key === "facts" ? "Ficha do projecto" : "Credits"}
+                        {key === "facts" ? "Ficha do projeto" : "Credits"}
                       </h2>
                       <button
                         className="small-add"
@@ -911,10 +911,10 @@ export default function Admin() {
             <div className="editor-section">
               <div className="editor-heading">
                 <div>
-                  <h2>Categorias dos projectos</h2>
+                  <h2>Categorias dos projetos</h2>
                   <p className="editor-description">
                     Estas categorias aparecem automaticamente como filtros na
-                    página de projectos.
+                    página de projetos.
                   </p>
                 </div>
               </div>
@@ -949,7 +949,7 @@ export default function Admin() {
                           (item) => item.category === category,
                         ).length
                       }{" "}
-                      projecto(s)
+                      projeto(s)
                     </span>
                     <div>
                       <button
@@ -1056,7 +1056,7 @@ export default function Admin() {
                   <textarea
                     rows="3"
                     value={content.settings.contactHeading || ""}
-                    placeholder="Um bom projecto começa por ouvir."
+                    placeholder="Um bom projeto começa por ouvir."
                     onChange={(e) =>
                       setContent((c) => ({
                         ...c,
@@ -1073,7 +1073,7 @@ export default function Admin() {
                   <textarea
                     rows="3"
                     value={content.settings.contactIntro || ""}
-                    placeholder="Conta-nos um pouco sobre o projecto."
+                    placeholder="Conta-nos um pouco sobre o projeto."
                     onChange={(e) =>
                       setContent((c) => ({
                         ...c,

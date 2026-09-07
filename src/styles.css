@@ -2592,3 +2592,51 @@ textarea {
     justify-self: end;
   }
 }
+
+
+/* Legendas sobre as imagens na página de projetos */
+
+.projects-page .project-card-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.projects-page .project-meta {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: flex-end;
+  padding: 90px 20px 20px;
+  color: #fff;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  pointer-events: none;
+}
+
+.projects-page .project-meta h2 {
+  color: #fff;
+}
+
+.projects-page .project-meta div {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.projects-page .project-open {
+  top: 18px;
+  right: 18px;
+  bottom: auto;
+  left: auto;
+}
+
+@media (max-width: 650px) {
+  .projects-page .project-meta {
+    padding: 65px 15px 15px;
+  }
+}

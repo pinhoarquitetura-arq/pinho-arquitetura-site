@@ -64,17 +64,17 @@ export default function Contact() {
     <section className="contact-page page-top section-pad">
       <div className="page-title-row">
         <h1>Contactos</h1>
-        <p>Vamos falar sobre o próximo projecto.</p>
+        <p>Vamos falar sobre o próximo projeto.</p>
       </div>
 
       <div className="contact-layout contact-layout--form">
         <div className="contact-form-column">
           <div className="contact-big">
-            {settings.contactHeading || "Um bom projecto começa por ouvir."}
+            {settings.contactHeading || "Um bom projeto começa por ouvir."}
           </div>
           <p className="contact-intro">
             {settings.contactIntro ||
-              "Conta-nos um pouco sobre o projecto. Respondemos assim que possível."}
+              "Conta-nos um pouco sobre o projeto. Respondemos assim que possível."}
           </p>
 
           <form className="contact-form" onSubmit={sendEmail}>
@@ -123,7 +123,7 @@ export default function Contact() {
                 rows="6"
                 value={form.message}
                 onChange={(event) => updateField("message", event.target.value)}
-                placeholder="Fala-nos um pouco sobre o projecto…"
+                placeholder="Fala-nos um pouco sobre o projeto…"
                 maxLength="5000"
                 required
               />

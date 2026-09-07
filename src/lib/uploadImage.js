@@ -124,7 +124,7 @@ export async function migrateEmbeddedImages(rawContent) {
 
   for (let projectIndex = 0; projectIndex < content.projects.length; projectIndex += 1) {
     const project = content.projects[projectIndex];
-    const prefix = project.id || `projecto-${projectIndex}`;
+    const prefix = project.id || `projeto-${projectIndex}`;
 
     project.cover = await migrateValue(project.cover, `${prefix}-capa`);
 
