@@ -1,17 +1,12 @@
-import {
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
-
-import Layout from "../../pinho-arquitetura-concept/src/components/Layout";
-import Home from "../../pinho-arquitetura-concept/src/pages/Home";
-import Projects from "../../pinho-arquitetura-concept/src/pages/Projects";
-import ProjectDetail from "../../pinho-arquitetura-concept/src/pages/ProjectDetail";
-import About from "../../pinho-arquitetura-concept/src/pages/About";
-import Contact from "../../pinho-arquitetura-concept/src/pages/Contact";
-import Admin from "../../pinho-arquitetura-concept/src/pages/Admin";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import Projects from "./pages/Projects";
+import ProjectDetail from "./pages/ProjectDetail";
 import Services from "./pages/Services";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Admin from "./pages/Admin";
 
 export default function App() {
   return (
@@ -20,38 +15,15 @@ export default function App() {
 
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-
-        <Route
-          path="/projetos"
-          element={<Projects />}
-        />
-
-        <Route
-          path="/projetos/:id"
-          element={<ProjectDetail />}
-        />
+        <Route path="/projetos" element={<Projects />} />
+        <Route path="/projetos/:id" element={<ProjectDetail />} />
         <Route path="/servicos" element={<Services />} />
-
-        <Route
-          path="/sobre-nos"
-          element={<About />}
-        />
-
-        {/* Links antigos passam para a página nova */}
+        <Route path="/sobre-nos" element={<About />} />
         <Route
           path="/estudio"
-          element={
-            <Navigate
-              to="/sobre-nos"
-              replace
-            />
-          }
+          element={<Navigate to="/sobre-nos" replace />}
         />
-
-        <Route
-          path="/contactos"
-          element={<Contact />}
-        />
+        <Route path="/contactos" element={<Contact />} />
       </Route>
     </Routes>
   );
