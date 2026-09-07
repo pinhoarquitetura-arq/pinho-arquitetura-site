@@ -1,163 +1,172 @@
-import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ProjectCard } from "../components/ProjectCard";
-import { useContent } from "../hooks/useContent";
+import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const sections = [
+const services = [
   {
-    value: "own",
-    label: "Projectos próprios",
-    description: "Projectos desenvolvidos integralmente pela Pinho Arquitetura.",
+    number: "01",
+    title: "Arquitetura",
+    text: "Do conceito ao projeto.",
   },
   {
-    value: "collaboration",
-    label: "Colaborações",
-    description:
-      "Projectos desenvolvidos em colaboração com outros ateliers e arquitectos.",
+    number: "02",
+    title: "Interiores",
+    text: "Espaços, materiais e detalhe.",
+  },
+  {
+    number: "03",
+    title: "Projeto e visualização",
+    text: "Coordenação BIM e visualização 3D.",
+  },
+  {
+    number: "04",
+    title: "Obra",
+    text: "Acompanhamento da execução.",
   },
 ];
 
-const getProjectType = (project) =>
-  project.projectType === "collaboration" ? "collaboration" : "own";
+const process = [
+  {
+    number: "01",
+    title: "Ouvir",
+    text: "Contexto e objetivos",
+  },
+  {
+    number: "02",
+    title: "Pensar",
+    text: "Conceito e estratégia",
+  },
+  {
+    number: "03",
+    title: "Desenvolver",
+    text: "Projeto e detalhe",
+  },
+  {
+    number: "04",
+    title: "Construir",
+    text: "Continuidade em obra",
+  },
+];
 
-const getCategories = (content) => {
-  if (Array.isArray(content.categories) && content.categories.length) {
-    return content.categories.filter(Boolean);
-  }
-  return [
-    ...new Set(
-      content.projects.map((project) => project.category).filter(Boolean),
-    ),
-  ];
-};
-
-export default function Projects() {
-  const { content, loading } = useContent();
-  const [section, setSection] = useState("own");
-  const [filter, setFilter] = useState("Todos");
-  const allCategories = useMemo(() => getCategories(content), [content]);
-
-  const sectionProjects = useMemo(
-    () =>
-      content.projects.filter(
-        (project) => getProjectType(project) === section,
-      ),
-    [content.projects, section],
-  );
-
-  const availableCategories = useMemo(
-    () =>
-      allCategories.filter((category) =>
-        sectionProjects.some((project) => project.category === category),
-      ),
-    [allCategories, sectionProjects],
-  );
-
-  const filters = ["Todos", ...availableCategories];
-  const list = useMemo(
-    () =>
-      filter === "Todos"
-        ? sectionProjects
-        : sectionProjects.filter((project) => project.category === filter),
-    [filter, sectionProjects],
-  );
-
-  const counts = useMemo(
-    () => ({
-      own: content.projects.filter(
-        (project) => getProjectType(project) === "own",
-      ).length,
-      collaboration: content.projects.filter(
-        (project) => getProjectType(project) === "collaboration",
-      ).length,
-    }),
-    [content.projects],
-  );
-
-  const activeSection = sections.find((item) => item.value === section);
-
-  useEffect(() => {
-    if (filter !== "Todos" && !availableCategories.includes(filter)) {
-      setFilter("Todos");
-    }
-  }, [availableCategories, filter]);
-
-  const chooseSection = (value) => {
-    setSection(value);
-    setFilter("Todos");
-  };
-
+export default function Services() {
   return (
-    <section className="projects-page section-pad page-top">
-      <div className="page-title-row">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          Projetos
-        </motion.h1>
-        <p>{content.projects.length.toString().padStart(2, "0")} projetos</p>
-      </div>
-
-      <div className="project-type-tabs" role="tablist" aria-label="Tipo de projecto">
-        {sections.map((item) => (
-          <button
-            key={item.value}
-            type="button"
-            role="tab"
-            aria-selected={section === item.value}
-            className={`project-type-tab ${section === item.value ? "active" : ""}`}
-            onClick={() => chooseSection(item.value)}
+    <article className="services-v2 page-top">
+      <section className="about-v2-title section-pad">
+        <div className="page-title-row">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
           >
-            <span>{item.label}</span>
-            <small>{counts[item.value].toString().padStart(2, "0")}</small>
-          </button>
-        ))}
-      </div>
+            Serviços
+          </motion.h1>
 
-      <motion.div
-        className="project-group-heading"
-        key={section}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45 }}
-      >
-        <h2>{activeSection.label}</h2>
-        <p>{activeSection.description}</p>
-      </motion.div>
-
-      {filters.length > 1 && (
-        <div className="filters">
-          {filters.map((category) => (
-            <button
-              type="button"
-              key={category}
-              className={filter === category ? "active" : ""}
-              onClick={() => setFilter(category)}
-            >
-              {category}
-            </button>
-          ))}
+          <p>Arquitetura, do conceito à obra.</p>
         </div>
-      )}
+      </section>
 
-      {!loading && list.length > 0 ? (
-        <motion.div
-          className="projects-grid"
-          key={`${section}-${filter}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.35 }}
+      <section className="about-v2-statement section-pad">
+        <span className="section-index">A ABORDAGEM</span>
+
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
         >
-          {list.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </motion.div>
-      ) : !loading ? (
-        <div className="projects-empty">
-          <span>Sem projectos publicados nesta secção.</span>
+          Espaços claros, funcionais e coerentes.
+          <br />
+          Uma linguagem contemporânea com
+          <br />
+          atenção ao <em>detalhe.</em>
+        </motion.p>
+      </section>
+
+      <section className="about-v2-services section-pad">
+        <div className="about-v2-section-title">
+          <span className="section-index">01 — SERVIÇOS</span>
+          <h2>O que fazemos</h2>
         </div>
-      ) : null}
-    </section>
+
+        <div className="about-v2-services-grid">
+          {services.map((service, index) => (
+            <motion.article
+              key={service.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-8%" }}
+              transition={{
+                duration: 0.55,
+                delay: index * 0.06,
+              }}
+            >
+              <div className="about-v2-service-top">
+                <span>{service.number}</span>
+
+                <div className="about-v2-service-symbol">
+                  <i />
+                  <i />
+                </div>
+              </div>
+
+              <div>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      <section className="about-v2-process section-pad">
+        <div className="about-v2-section-title">
+          <span className="section-index">
+            02 — COMO TRABALHAMOS
+          </span>
+
+          <h2>Um processo claro</h2>
+        </div>
+
+        <div className="about-v2-process-line">
+          {process.map((step, index) => (
+            <motion.div
+              className="about-v2-step"
+              key={step.number}
+              initial={{ opacity: 0, x: -15 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-8%" }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.08,
+              }}
+            >
+              <div className="about-v2-step-marker">
+                <span>{step.number}</span>
+              </div>
+
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="about-v2-contact section-pad">
+        <span className="section-index">03 — CONTACTO</span>
+
+        <div>
+          <h2>
+            Tem um espaço
+            <br />
+            para <em>transformar?</em>
+          </h2>
+
+          <Link to="/contactos" className="cta-pill">
+            Falar connosco
+            <ArrowUpRight size={18} />
+          </Link>
+        </div>
+      </section>
+    </article>
   );
 }

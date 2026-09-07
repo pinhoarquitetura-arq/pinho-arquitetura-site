@@ -9,7 +9,11 @@
       "destination": "/index.html"
     },
     {
-      "source": "/projetos/:id",
+      "source": "/projetos/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/servicos",
       "destination": "/index.html"
     },
     {
@@ -17,12 +21,12 @@
       "destination": "/index.html"
     },
     {
-      "source": "/contactos",
+      "source": "/estudio",
       "destination": "/index.html"
     },
     {
-        "source": "/servicos",
-        "destination": "/index.html"
+      "source": "/contactos",
+      "destination": "/index.html"
     }
   ]
 }
