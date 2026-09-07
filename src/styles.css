@@ -2640,3 +2640,50 @@ textarea {
     padding: 65px 15px 15px;
   }
 }
+
+/* Título inspirado na identidade Pinho Arquitetura */
+
+.hero .hero-conversation-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: none;
+  margin: 0;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(50px, 6.2vw, 100px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+.hero-conversation-title span {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero-conversation-title span:first-child {
+  color: #403832;
+}
+
+.hero-conversation-title span:last-child {
+  color: #b9a18d;
+}
+
+@media (max-width: 900px) {
+  .hero .hero-conversation-title {
+    font-size: clamp(43px, 7vw, 66px);
+  }
+}
+
+@media (max-width: 650px) {
+  .hero .hero-conversation-title {
+    gap: 5px;
+    font-size: clamp(38px, 11vw, 52px);
+    line-height: 0.95;
+  }
+
+  .hero-conversation-title span {
+    white-space: normal;
+  }
+}

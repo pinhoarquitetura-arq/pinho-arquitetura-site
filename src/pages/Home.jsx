@@ -25,6 +25,7 @@ export default function Home() {
 
         <div className="hero-main">
           <motion.h1
+            className="hero-conversation-title"
             initial={{ opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -32,10 +33,8 @@ export default function Home() {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            Espaços pensados
-            <br />
-            com clareza, matéria
-            <br />e <em>tempo.</em>
+            <span>UM BOM PROJETO</span>
+            <span>UMA BOA CONVERSA</span>
           </motion.h1>
 
           <motion.div
