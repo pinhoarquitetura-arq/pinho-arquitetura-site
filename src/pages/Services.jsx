@@ -15,8 +15,8 @@ const services = [
   },
   {
     number: "03",
-    title: "Projeto e visualização",
-    text: "Coordenação BIM e visualização 3D.",
+    title: "BIM + Visualização 3D",
+    text: "Projeto e visualização",
   },
   {
     number: "04",

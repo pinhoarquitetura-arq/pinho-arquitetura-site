@@ -2483,3 +2483,53 @@ textarea {
     font-size: 44px;
   }
 }
+
+/* Rodapé — logótipo horizontal */
+
+.footer-brand-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.footer-logo-frame {
+  display: block;
+  width: clamp(300px, 27vw, 390px);
+  aspect-ratio: 3.5 / 1;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.footer-logo-horizontal {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  transform: translateY(-35%);
+}
+
+.footer-services-line {
+  margin: 0;
+  color: #b9a28e;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .footer-services-line {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 650px) {
+  .footer-logo-frame {
+    width: min(310px, 82vw);
+  }
+
+  .footer-services-line {
+    max-width: 310px;
+    font-size: 12px;
+  }
+}
