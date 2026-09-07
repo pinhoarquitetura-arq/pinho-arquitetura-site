@@ -291,78 +291,52 @@
 
 /* Retrato circular na página Sobre nós */
 
-.about-v2-person {
-  width: min(100%, 360px);
-  justify-self: center;
-  align-self: center;
-}
-
-.about-v2-image {
-  aspect-ratio: 1;
-  border-radius: 50%;
-}
-
-.about-v2-image::after {
-  border-radius: 50%;
-}
-
-.about-v2-image img {
-  object-position: center 35%;
-  transform: scale(1.03);
-}
-
-.about-v2-person:hover img {
-  transform: scale(1.07);
-}
-
-.services-v2 .about-v2-statement {
-  border-top: 0;
-}
-
-@media (max-width: 650px) {
-  .about-v2-person {
-    width: min(78vw, 320px);
-    justify-self: center;
-  }
-}
-
-/* Retrato do arquiteto */
-
-.about-v2-person {
-  width: min(100%, 370px);
-  max-width: 370px;
+/* Retrato circular — Sobre nós */
+.about-v2-intro .about-v2-person {
+  width: min(360px, 100%);
   margin: 0 auto;
   justify-self: center;
   align-self: center;
 }
 
-.about-v2-image {
-  width: 100%;
-  aspect-ratio: 1;
-  overflow: hidden;
+.about-v2-intro .about-v2-image {
+  width: 360px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
+  overflow: hidden;
   background: #d8c8b8;
 }
 
-.about-v2-image::after {
+.about-v2-intro .about-v2-image::after {
   border-radius: 50%;
 }
 
-.about-v2-image img {
+.about-v2-intro .about-v2-image img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 68% 35%;
+  object-position: 68% 34%;
+  border-radius: 50%;
   transform: scale(1.08);
 }
 
-.about-v2-person:hover img {
+.about-v2-intro .about-v2-person:hover img {
   transform: scale(1.12);
 }
 
-@media (max-width: 650px) {
-  .about-v2-person {
-    width: min(76vw, 320px);
-    justify-self: center;
+.about-v2-intro .about-v2-person figcaption {
+  width: 100%;
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .about-v2-intro .about-v2-person {
+    margin-top: 45px;
+  }
+
+  .about-v2-intro .about-v2-image {
+    width: min(320px, 78vw);
   }
 }

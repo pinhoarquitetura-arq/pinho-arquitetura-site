@@ -13,7 +13,7 @@ const sections = [
     value: "collaboration",
     label: "Colaborações",
     description:
-      "Projectos desenvolvidos em colaboração com outros ateliers e arquitectos.",
+      "Projectos desenvolvidos em colaboração com outros ateliers e arquitetos.",
   },
 ];
 
