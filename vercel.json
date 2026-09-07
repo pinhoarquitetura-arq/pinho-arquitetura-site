@@ -1,0 +1,32 @@
+{
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/projetos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/projetos/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/servicos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/sobre-nos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/estudio",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contactos",
+      "destination": "/index.html"
+    }
+  ]
+}
