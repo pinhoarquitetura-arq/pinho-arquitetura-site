@@ -2533,3 +2533,62 @@ textarea {
     font-size: 12px;
   }
 }
+
+
+/* Hero com texto e símbolo lado a lado */
+
+.hero-main {
+  align-self: center;
+  display: grid;
+  grid-template-columns: minmax(0, 950px) minmax(180px, 290px);
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(55px, 8vw, 150px);
+  width: 100%;
+}
+
+.hero .hero-main h1 {
+  margin: 0;
+  max-width: 950px;
+  font-size: clamp(54px, 6.5vw, 104px);
+  line-height: 0.92;
+}
+
+.hero-main-symbol {
+  width: min(300%,620px);
+  justify-self: end;
+}
+
+.hero-main-symbol img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .hero-main {
+    grid-template-columns: minmax(0, 1fr) 170px;
+    gap: 35px;
+  }
+
+  .hero .hero-main h1 {
+    font-size: clamp(48px, 7.5vw, 72px);
+  }
+}
+
+@media (max-width: 650px) {
+  .hero-main {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .hero .hero-main h1 {
+    font-size: clamp(45px, 13vw, 59px);
+  }
+
+  .hero-main-symbol {
+    width: 125px;
+    justify-self: end;
+  }
+}
