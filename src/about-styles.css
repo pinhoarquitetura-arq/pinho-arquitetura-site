@@ -288,3 +288,40 @@
     padding-bottom: 95px;
   }
 }
+
+/* Retrato circular na página Sobre nós */
+
+.about-v2-person {
+  width: min(100%, 360px);
+  justify-self: center;
+  align-self: center;
+}
+
+.about-v2-image {
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.about-v2-image::after {
+  border-radius: 50%;
+}
+
+.about-v2-image img {
+  object-position: center 35%;
+  transform: scale(1.03);
+}
+
+.about-v2-person:hover img {
+  transform: scale(1.07);
+}
+
+.services-v2 .about-v2-statement {
+  border-top: 0;
+}
+
+@media (max-width: 650px) {
+  .about-v2-person {
+    width: min(78vw, 320px);
+    justify-self: center;
+  }
+}

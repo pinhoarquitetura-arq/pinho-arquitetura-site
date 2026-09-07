@@ -4,13 +4,14 @@ import {
   Routes,
 } from "react-router-dom";
 
-import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-import ProjectDetail from "./pages/ProjectDetail";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Admin from "./pages/Admin";
+import Layout from "../../pinho-arquitetura-concept/src/components/Layout";
+import Home from "../../pinho-arquitetura-concept/src/pages/Home";
+import Projects from "../../pinho-arquitetura-concept/src/pages/Projects";
+import ProjectDetail from "../../pinho-arquitetura-concept/src/pages/ProjectDetail";
+import About from "../../pinho-arquitetura-concept/src/pages/About";
+import Contact from "../../pinho-arquitetura-concept/src/pages/Contact";
+import Admin from "../../pinho-arquitetura-concept/src/pages/Admin";
+import Services from "./pages/Services";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
           path="/projetos/:id"
           element={<ProjectDetail />}
         />
+        <Route path="/servicos" element={<Services />} />
 
         <Route
           path="/sobre-nos"
