@@ -11,9 +11,34 @@ export default function Home() {
     .filter((project) => project.featured)
     .slice(0, 3);
 
+  const mainProject = featured[0];
+
   return (
     <>
-      <section className="hero">
+      <section
+        className={`hero ${
+          mainProject ? "hero--featured" : ""
+        }`}
+      >
+        {!loading && mainProject && (
+          <>
+            <motion.img
+              className="hero-background-image"
+              src={mainProject.cover}
+              alt=""
+              aria-hidden="true"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            />
+
+            <div className="hero-background-overlay" />
+          </>
+        )}
+
         <motion.div
           className="hero-kicker"
           initial={{ opacity: 0 }}
@@ -36,22 +61,6 @@ export default function Home() {
             <span>UM BOM PROJETO</span>
             <span>UMA BOA CONVERSA</span>
           </motion.h1>
-
-          <motion.div
-            className="hero-main-symbol"
-            initial={{ opacity: 0, x: 25 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              duration: 0.9,
-              delay: 0.2,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <img
-              src="/logos/pinho_linkedin.png"
-              alt="Símbolo Pinho Arquitetura"
-            />
-          </motion.div>
         </div>
 
         <motion.div
@@ -60,49 +69,45 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.45 }}
         >
-          <p>{content.settings.tagline}</p>
+          <div className="hero-bottom-content">
+            <p>{content.settings.tagline}</p>
+
+            {!loading && mainProject && (
+              <Link
+                className="hero-featured-link"
+                to={`/projetos/${mainProject.id}`}
+              >
+                <span>
+                  <b>{mainProject.title}</b>
+
+                  <small>
+                    {mainProject.location}
+                    {mainProject.year
+                      ? ` · ${mainProject.year}`
+                      : ""}
+                  </small>
+                </span>
+
+                Ver projeto
+                <ArrowUpRight size={17} />
+              </Link>
+            )}
+          </div>
 
           <a
-            href="#selecionados"
+            href="#sobre-home"
             className="circle-action"
-            aria-label="Ver projetos selecionados"
+            aria-label="Continuar a explorar"
           >
             <ArrowDown size={18} />
           </a>
         </motion.div>
       </section>
 
-      {!loading && featured[0] && (
-        <section
-          className="hero-project"
-          id="selecionados"
-        >
-          <Link to={`/projetos/${featured[0].id}`}>
-            <motion.img
-              src={featured[0].cover}
-              alt={featured[0].title}
-              initial={{ scale: 1.03 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 1.3,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            />
-
-            <div className="hero-project-caption">
-              <div>
-                <b>{featured[0].title}</b>
-                <span>{featured[0].location}</span>
-              </div>
-
-              <span>{featured[0].year}</span>
-            </div>
-          </Link>
-        </section>
-      )}
-
-      <section className="manifesto-grid section-pad">
+      <section
+        className="manifesto-grid section-pad"
+        id="sobre-home"
+      >
         <span className="section-index">
           01 — SOBRE NÓS
         </span>
@@ -125,7 +130,7 @@ export default function Home() {
       <section className="selected-projects section-pad">
         <div className="section-heading-row">
           <span className="section-index">
-            02 — PROJETOS SELECCIONADOS
+            02 — PROJETOS SELECIONADOS
           </span>
 
           <Link
@@ -138,14 +143,16 @@ export default function Home() {
         </div>
 
         <div className="home-project-grid">
-          {featured.slice(1).map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              large={index === 0}
-            />
-          ))}
+          {featured
+            .slice(1)
+            .map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                large={index === 0}
+              />
+            ))}
         </div>
       </section>
 
@@ -165,7 +172,7 @@ export default function Home() {
             to="/contactos"
             className="cta-pill"
           >
-            Falar connosco
+            Fale connosco
             <ArrowUpRight size={18} />
           </Link>
         </div>

@@ -148,7 +148,7 @@ export default function Contact() {
         </div>
 
         <aside className="contact-details">
-          <span className="section-index">CONTACTO DIRECTO</span>
+          <span className="section-index">CONTACTO</span>
           <div className="contact-list">
             <div>
               <MapPin size={18} />
@@ -166,7 +166,7 @@ export default function Contact() {
             </div>
             <div>
               <Phone size={18} />
-              <span>Telefone</span>
+              <span>Telemóvel</span>
               {settings.phone ? (
                 <a href={`tel:${settings.phone}`}>{settings.phone}</a>
               ) : (

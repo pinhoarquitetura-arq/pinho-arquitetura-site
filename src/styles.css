@@ -2493,22 +2493,6 @@ textarea {
   gap: 14px;
 }
 
-.footer-logo-frame {
-  display: block;
-  width: clamp(300px, 27vw, 390px);
-  aspect-ratio: 3.5 / 1;
-  overflow: hidden;
-  flex: 0 0 auto;
-}
-
-.footer-logo-horizontal {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: none;
-  transform: translateY(-35%);
-}
-
 .footer-services-line {
   margin: 0;
   color: #b9a28e;
@@ -2754,4 +2738,151 @@ textarea {
   .project-detail .gallery figure img {
     max-height: none;
   }
+}
+
+/* Projeto principal como fundo da Home */
+
+.hero--featured {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+}
+
+.hero-background-image {
+  position: absolute;
+  z-index: -3;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-background-overlay {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(18, 16, 14, 0.72) 0%,
+      rgba(18, 16, 14, 0.46) 52%,
+      rgba(18, 16, 14, 0.25) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(18, 16, 14, 0.55) 0%,
+      transparent 45%
+    );
+}
+
+.hero--featured .hero-kicker {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.hero--featured .hero-conversation-title span:first-child {
+  color: #fff;
+}
+
+.hero--featured .hero-conversation-title span:last-child {
+  color: #d2b9a3;
+}
+
+.hero--featured .hero-bottom p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero-bottom-content {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(35px, 7vw, 120px);
+}
+
+.hero-featured-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding-bottom: 5px;
+  color: #fff;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.hero-featured-link > span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hero-featured-link b {
+  font-weight: 500;
+}
+
+.hero-featured-link small {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+}
+
+.hero--featured .circle-action {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.hero--featured .circle-action:hover {
+  color: #161616;
+  background: #fff;
+  border-color: #fff;
+}
+
+@media (max-width: 650px) {
+  .hero-background-overlay {
+    background: rgba(18, 16, 14, 0.55);
+  }
+
+  .hero-bottom-content {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 17px;
+  }
+
+  .hero-featured-link small {
+    display: none;
+  }
+}
+
+.services-v2 .about-v2-service-top {
+  justify-content: flex-end;
+}
+
+/* Identidade textual do rodapé */
+
+.footer-brand-text {
+  display: inline-block;
+  color: #f0ebe5;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease;
+}
+
+.footer-brand-text:hover {
+  opacity: 0.65;
+}
+
+.footer-services-line {
+  margin: 0;
+  color: #b9a28e;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.footer-brand-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }

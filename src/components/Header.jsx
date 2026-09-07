@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 
 const navigation = [
+  { to: "/", label: "Início" },
   { to: "/projetos", label: "Projetos" },
   { to: "/servicos", label: "Serviços" },
   { to: "/sobre-nos", label: "Sobre nós" },
@@ -11,7 +12,13 @@ const navigation = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const closeMenu = () => setMenuOpen(false);
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const getLinkClass = ({ isActive }) =>
+    isActive ? "active" : "";
 
   return (
     <>
@@ -31,12 +38,16 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="desktop-nav" aria-label="Navegação principal">
+        <nav
+          className="desktop-nav"
+          aria-label="Navegação principal"
+        >
           {navigation.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
-              className={({ isActive }) => (isActive ? "active" : "")}
+              end={item.to === "/"}
+              className={getLinkClass}
             >
               {item.label}
             </NavLink>
@@ -46,18 +57,35 @@ export default function Header() {
         <button
           className="menu-button"
           type="button"
-          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-label={
+            menuOpen ? "Fechar menu" : "Abrir menu"
+          }
           aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((current) => !current)}
+          onClick={() =>
+            setMenuOpen((current) => !current)
+          }
         >
-          {menuOpen ? <X size={23} /> : <Menu size={23} />}
+          {menuOpen ? (
+            <X size={23} />
+          ) : (
+            <Menu size={23} />
+          )}
         </button>
       </header>
 
       {menuOpen && (
-        <nav className="mobile-menu" aria-label="Navegação móvel">
+        <nav
+          className="mobile-menu"
+          aria-label="Navegação móvel"
+        >
           {navigation.map((item) => (
-            <NavLink key={item.to} to={item.to} onClick={closeMenu}>
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === "/"}
+              className={getLinkClass}
+              onClick={closeMenu}
+            >
               {item.label}
             </NavLink>
           ))}

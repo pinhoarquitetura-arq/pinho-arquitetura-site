@@ -4,22 +4,18 @@ import { Link } from "react-router-dom";
 
 const services = [
   {
-    number: "01",
     title: "Arquitetura",
     text: "Do conceito ao projeto.",
   },
   {
-    number: "02",
     title: "Interiores",
     text: "Espaços, materiais e detalhe.",
   },
   {
-    number: "03",
     title: "BIM + Visualização 3D",
-    text: "Projeto e visualização",
+    text: "Projeto e visualização.",
   },
   {
-    number: "04",
     title: "Obra",
     text: "Acompanhamento da execução.",
   },
@@ -66,7 +62,9 @@ export default function Services() {
       </section>
 
       <section className="about-v2-statement section-pad">
-        <span className="section-index">A ABORDAGEM</span>
+        <span className="section-index">
+          A ABORDAGEM
+        </span>
 
         <motion.p
           initial={{ opacity: 0, y: 24 }}
@@ -82,46 +80,10 @@ export default function Services() {
         </motion.p>
       </section>
 
-      <section className="about-v2-services section-pad">
-        <div className="about-v2-section-title">
-          <span className="section-index">01 — SERVIÇOS</span>
-          <h2>O que fazemos</h2>
-        </div>
-
-        <div className="about-v2-services-grid">
-          {services.map((service, index) => (
-            <motion.article
-              key={service.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-8%" }}
-              transition={{
-                duration: 0.55,
-                delay: index * 0.06,
-              }}
-            >
-              <div className="about-v2-service-top">
-                <span>{service.number}</span>
-
-                <div className="about-v2-service-symbol">
-                  <i />
-                  <i />
-                </div>
-              </div>
-
-              <div>
-                <h3>{service.title}</h3>
-                <p>{service.text}</p>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </section>
-
       <section className="about-v2-process section-pad">
         <div className="about-v2-section-title">
           <span className="section-index">
-            02 — COMO TRABALHAMOS
+            01 — COMO TRABALHAMOS
           </span>
 
           <h2>Um processo claro</h2>
@@ -134,7 +96,10 @@ export default function Services() {
               key={step.number}
               initial={{ opacity: 0, x: -15 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-8%" }}
+              viewport={{
+                once: true,
+                margin: "-8%",
+              }}
               transition={{
                 duration: 0.5,
                 delay: index * 0.08,
@@ -151,8 +116,50 @@ export default function Services() {
         </div>
       </section>
 
+      <section className="about-v2-services section-pad">
+        <div className="about-v2-section-title">
+          <span className="section-index">
+            02 — SERVIÇOS
+          </span>
+
+          <h2>O que fazemos</h2>
+        </div>
+
+        <div className="about-v2-services-grid">
+          {services.map((service, index) => (
+            <motion.article
+              key={service.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{
+                once: true,
+                margin: "-8%",
+              }}
+              transition={{
+                duration: 0.55,
+                delay: index * 0.06,
+              }}
+            >
+              <div className="about-v2-service-top">
+                <div className="about-v2-service-symbol">
+                  <i />
+                  <i />
+                </div>
+              </div>
+
+              <div>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
       <section className="about-v2-contact section-pad">
-        <span className="section-index">03 — CONTACTO</span>
+        <span className="section-index">
+          03 — CONTACTO
+        </span>
 
         <div>
           <h2>
@@ -161,7 +168,10 @@ export default function Services() {
             para <em>transformar?</em>
           </h2>
 
-          <Link to="/contactos" className="cta-pill">
+          <Link
+            to="/contactos"
+            className="cta-pill"
+          >
             Falar connosco
             <ArrowUpRight size={18} />
           </Link>

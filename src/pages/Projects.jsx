@@ -8,7 +8,7 @@ const sections = [
     value: "own",
     label: "Autoria",
     description:
-      "Projetos de autoria da Pinho Arquitetura.",
+      "Projetos em autoria ou coautoria da Pinho Arquitetura.",
   },
   {
     value: "collaboration",

@@ -5,20 +5,15 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-brand-block">
         <Link
-          className="footer-logo-frame"
+          className="footer-brand-text"
           to="/"
           aria-label="Pinho Arquitetura — Página inicial"
         >
-          <img
-            className="footer-logo-horizontal"
-            src="/logos/logo_sem_fundo.png"
-            alt="Pinho Arquitetura"
-          />
+          PINHO ARQUITETURA
         </Link>
 
         <p className="footer-services-line">
-          Arquitetura · Interiores · Visualização 3D · BIM ·
-          Acompanhamento de obra
+          Arquitetura e Interiores, do conceito à obra.
         </p>
       </div>
 
@@ -26,6 +21,7 @@ export default function Footer() {
         className="footer-links"
         aria-label="Navegação do rodapé"
       >
+        <Link to="/">Início</Link>
         <Link to="/projetos">Projetos</Link>
         <Link to="/servicos">Serviços</Link>
         <Link to="/sobre-nos">Sobre nós</Link>
@@ -36,7 +32,7 @@ export default function Footer() {
         </Link>
       </nav>
 
-      <span>
+      <span className="footer-copyright">
         © {new Date().getFullYear()} Pinho Arquitetura
       </span>
     </footer>
