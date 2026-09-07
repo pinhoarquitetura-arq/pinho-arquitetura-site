@@ -781,7 +781,7 @@ export default function Admin() {
                   <div className="editor-section" key={key}>
                     <div className="editor-heading">
                       <h2>
-                        {key === "facts" ? "Ficha do projeto" : "Credits"}
+                        {key === "facts" ? "Ficha do projeto" : "Créditos"}
                       </h2>
                       <button
                         className="small-add"
