@@ -189,7 +189,7 @@ export default function ProjectDetail() {
 
       {next && (
         <section className="next-project section-pad">
-          <span>projeto seguinte</span>
+          <span>Projeto seguinte</span>
           <Link to={`/projetos/${next.id}`}>
             <h2>{next.title}</h2>
             <ArrowUpRight size={34} />
