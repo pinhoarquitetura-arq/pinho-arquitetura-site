@@ -340,3 +340,80 @@
     width: min(320px, 78vw);
   }
 }
+
+/* CORREÇÃO FINAL DO RETRATO */
+
+.about-v2-intro {
+grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
+align-items: center;
+gap: clamp(50px, 6vw, 110px);
+}
+
+.about-v2-intro .about-v2-person {
+width: 360px !important;
+max-width: 360px !important;
+margin: 0 auto !important;
+justify-self: center !important;
+align-self: center !important;
+}
+
+.about-v2-intro .about-v2-image {
+width: 360px !important;
+height: 360px !important;
+max-width: 360px !important;
+aspect-ratio: 1 / 1 !important;
+border-radius: 50% !important;
+overflow: hidden !important;
+background: #d8c8b8;
+}
+
+.about-v2-intro .about-v2-image::after {
+border-radius: 50% !important;
+}
+
+.about-v2-intro .about-v2-image img {
+display: block;
+width: 100% !important;
+height: 100% !important;
+object-fit: cover !important;
+object-position: 68% 34% !important;
+border-radius: 50% !important;
+transform: scale(1.08);
+}
+
+.about-v2-intro .about-v2-person:hover img {
+transform: scale(1.12);
+}
+
+.about-v2-intro .about-v2-person figcaption {
+width: 100%;
+margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+.about-v2-intro {
+grid-template-columns: 1fr;
+}
+
+.about-v2-intro .about-v2-person {
+width: 320px !important;
+max-width: 320px !important;
+margin-top: 45px !important;
+}
+
+.about-v2-intro .about-v2-image {
+width: 320px !important;
+height: 320px !important;
+}
+}
+
+@media (max-width: 650px) {
+.about-v2-intro .about-v2-person {
+width: min(78vw, 300px) !important;
+}
+
+.about-v2-intro .about-v2-image {
+width: min(78vw, 300px) !important;
+height: min(78vw, 300px) !important;
+}
+}

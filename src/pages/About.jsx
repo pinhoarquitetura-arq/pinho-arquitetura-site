@@ -48,14 +48,38 @@ export default function About() {
 
         <motion.figure
           className="about-v2-person"
+          style={{
+            width: "500px",
+            maxWidth: "100%",
+            margin: "0 auto",
+            justifySelf: "center",
+            alignSelf: "center",
+          }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.2 }}
         >
-          <div className="about-v2-image">
+          <div
+            className="about-v2-image"
+            style={{
+              width: "500px",
+              maxWidth: "100%",
+              aspectRatio: "1 / 1",
+              borderRadius: "50%",
+              overflow: "hidden",
+            }}
+          >
             <img
               src="/logos/pinho_linkedin.png"
               alt="Diogo Pinho, arquiteto"
+              style={{
+                display: "block",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "68% 34%",
+                borderRadius: "50%",
+              }}
             />
           </div>
 
