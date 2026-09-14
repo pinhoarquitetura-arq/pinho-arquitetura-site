@@ -257,7 +257,7 @@ export default function Admin() {
       description: "Descrição do projeto.",
       facts: [
         ["Tipologia", ""],
-        ["Área", ""],
+        ["Área", "0 m²"],
       ],
       drawings: [],
       models: [],
