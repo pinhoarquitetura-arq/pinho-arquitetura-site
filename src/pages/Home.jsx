@@ -10,7 +10,7 @@ const renderIntro = (intro) => {
 
   return parts.map((part, index) =>
     part.toLowerCase() === "uma relação precisa entre contexto, matéria e forma." ? (
-      <strong key={index}><em>{part}</em></strong>
+      <em key={index}>{part}</em>
     ) : (
       part
     ),
