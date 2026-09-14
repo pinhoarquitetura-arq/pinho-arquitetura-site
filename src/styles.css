@@ -162,14 +162,13 @@ textarea {
   transform: translateY(3px);
 }
 .hero-project {
-  padding: 170px 28px 0;
+  padding: 170px 0 0;
 }
 .hero-project a {
   display: block;
   position: relative;
-  width: min(100%, 1100px);
+  width: 100%;
   aspect-ratio: 1;
-  margin: 0 auto;
   overflow: hidden;
   background: #e7e3db;
 }
@@ -217,7 +216,7 @@ textarea {
 }
 .big-copy em {
   font-family: Georgia, serif;
-  font-weight: 400;
+  font-weight: 700;
 }
 .text-link {
   display: inline-flex;
@@ -1459,7 +1458,7 @@ textarea {
     height: 100%;
   }
   .hero-project {
-    padding-top: 120px;
+    padding: 120px 0 0;
   }
   .manifesto-grid {
     padding-top: 90px;

@@ -4,10 +4,16 @@ import { ArrowUpRight } from "lucide-react";
 import { useContent } from "../hooks/useContent";
 
 const renderIntro = (intro) => {
-  const parts = intro.split(/(matéria e forma)/gi);
+  const parts = intro.split(
+    /(uma relação precisa entre contexto, matéria e forma\.)/gi,
+  );
 
   return parts.map((part, index) =>
-    part.toLowerCase() === "matéria e forma" ? <em key={index}>{part}</em> : part,
+    part.toLowerCase() === "uma relação precisa entre contexto, matéria e forma." ? (
+      <strong key={index}><em>{part}</em></strong>
+    ) : (
+      part
+    ),
   );
 };
 
