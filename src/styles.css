@@ -796,10 +796,10 @@ textarea {
 }
 .contact-details .contact-monogram {
   display: block;
-  width: 200px !important;
-  height: 300px !important;
-  max-width: 110px;
-  max-height: 156px;
+  width: 400px !important;
+  height: 400px !important;
+  max-width: 600px;
+  max-height: 1000px;
   margin: 0 auto 8px;
   object-fit: contain;
   object-position: left center;
