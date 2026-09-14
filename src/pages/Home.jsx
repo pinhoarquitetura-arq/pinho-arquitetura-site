@@ -1,78 +1,27 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { ProjectCard } from "../components/ProjectCard";
+import { ArrowUpRight } from "lucide-react";
 import { useContent } from "../hooks/useContent";
+
+const renderIntro = (intro) => {
+  const parts = intro.split(/(matéria e forma)/gi);
+
+  return parts.map((part, index) =>
+    part.toLowerCase() === "matéria e forma" ? <em key={index}>{part}</em> : part,
+  );
+};
 
 export default function Home() {
   const { content, loading } = useContent();
 
   const featured = content.projects
     .filter((project) => project.featured)
-    .slice(0, 3);
+    .slice(0, 1);
 
   return (
     <>
-      <section className="hero">
-        <motion.div
-          className="hero-kicker"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.15 }}
-        >
-          PINHO ARQUITETURA · AVEIRO
-        </motion.div>
-
-        <div className="hero-main">
-          <motion.h1
-            className="hero-conversation-title"
-            initial={{ opacity: 0, y: 26 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <span>UM BOM PROJETO</span>
-            <span>UMA BOA CONVERSA</span>
-          </motion.h1>
-
-          <motion.div
-            className="hero-main-symbol"
-            initial={{ opacity: 0, x: 25 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              duration: 0.9,
-              delay: 0.2,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-          </motion.div>
-        </div>
-
-        <motion.div
-          className="hero-bottom"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.45 }}
-        >
-          <p>{content.settings.tagline}</p>
-
-          <a
-            href="#selecionados"
-            className="circle-action"
-            aria-label="Ver projetos selecionados"
-          >
-            <ArrowDown size={18} />
-          </a>
-        </motion.div>
-      </section>
-
       {!loading && featured[0] && (
-        <section
-          className="hero-project"
-          id="selecionados"
-        >
+        <section className="hero-project">
           <Link to={`/projetos/${featured[0].id}`}>
             <motion.img
               src={featured[0].cover}
@@ -105,7 +54,7 @@ export default function Home() {
 
         <div>
           <p className="big-copy">
-            {content.settings.intro}
+            {renderIntro(content.settings.intro)}
           </p>
 
           <Link
@@ -118,36 +67,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="selected-projects section-pad">
-        <div className="section-heading-row">
-          <span className="section-index">
-            02 — PROJETOS SELECCIONADOS
-          </span>
-
-          <Link
-            to="/projetos"
-            className="text-link"
-          >
-            Ver todos
-            <ArrowUpRight size={17} />
-          </Link>
-        </div>
-
-        <div className="home-project-grid">
-          {featured.slice(1).map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              large={index === 0}
-            />
-          ))}
-        </div>
-      </section>
-
       <section className="contact-cta section-pad">
         <span className="section-index">
-          03 — CONTACTO
+          02 — CONTACTO
         </span>
 
         <div>

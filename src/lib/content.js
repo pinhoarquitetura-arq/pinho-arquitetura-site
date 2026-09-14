@@ -8,8 +8,6 @@ export const defaultContent = {
     tagline: "Arquitetura e interiores, do conceito à obra.",
     intro: "Criamos espaços claros, funcionais e pensados para serem vividos.",
     contactHeading: "Um bom projeto começa por ouvir.",
-    contactIntro:
-      "Conta-nos um pouco sobre o projeto. Respondemos assim que possível.",
     email: "",
     phone: "",
     address: "Aveiro, Portugal",
@@ -38,7 +36,15 @@ const normaliseContent = (value) => ({
     ...(isContent(value) ? value.settings : {}),
   },
   categories: Array.isArray(value?.categories) ? value.categories : [],
-  projects: Array.isArray(value?.projects) ? value.projects : [],
+  projects: (Array.isArray(value?.projects) ? value.projects : []).map(
+    (project, index, projects) => ({
+      ...project,
+      // Mantém apenas o primeiro projeto marcado como destaque.
+      featured:
+        Boolean(project.featured) &&
+        !projects.slice(0, index).some((item) => item.featured),
+    }),
+  ),
 });
 
 const readLocalContent = () => {

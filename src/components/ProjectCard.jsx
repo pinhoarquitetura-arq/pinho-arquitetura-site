@@ -17,8 +17,11 @@ export function ProjectCard({ project, index = 0, large = false }) {
           <span className="project-open">Ver projeto</span>
         </div>
         <div className="project-meta">
-          <h2>{project.title}</h2>
-          <div><span>{project.location}</span><span>{project.year}</span></div>
+          <div className="project-meta-copy">
+            <h2>{project.title}</h2>
+            <span>{project.location}</span>
+          </div>
+          <span className="project-year">{project.year}</span>
         </div>
       </Link>
     </motion.article>

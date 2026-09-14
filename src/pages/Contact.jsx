@@ -4,6 +4,14 @@ import { useContent } from "../hooks/useContent";
 
 const emptyForm = { name: "", email: "", phone: "", message: "" };
 
+const renderContactHeading = (heading) => {
+  const parts = heading.split(/(conversa)/gi);
+
+  return parts.map((part, index) =>
+    part.toLowerCase() === "conversa" ? <em key={index}>{part}</em> : part,
+  );
+};
+
 export default function Contact() {
   const { content } = useContent();
   const settings = content.settings;
@@ -70,13 +78,10 @@ export default function Contact() {
       <div className="contact-layout contact-layout--form">
         <div className="contact-form-column">
           <div className="contact-big">
-            {settings.contactHeading || "Um bom projeto começa por ouvir."}
+            {renderContactHeading(
+              settings.contactHeading || "Um bom projeto começa por ouvir.",
+            )}
           </div>
-          <p className="contact-intro">
-            {settings.contactIntro ||
-              "Conta-nos um pouco sobre o projeto. Respondemos assim que possível."}
-          </p>
-
           <form className="contact-form" onSubmit={sendEmail}>
             <div className="contact-form-grid">
               <label>
@@ -123,7 +128,7 @@ export default function Contact() {
                 rows="6"
                 value={form.message}
                 onChange={(event) => updateField("message", event.target.value)}
-                placeholder="Fala-nos um pouco sobre o projeto…"
+                placeholder="Ajude-nos a entender melhor o seu projeto."
                 maxLength="5000"
                 required
               />
@@ -148,6 +153,11 @@ export default function Contact() {
         </div>
 
         <aside className="contact-details">
+          <img
+            className="contact-monogram"
+            src="/logos/monograma-transparente.png"
+            alt=""
+          />
           <span className="section-index">CONTACTO</span>
           <div className="contact-list">
             <div>

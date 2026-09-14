@@ -58,14 +58,21 @@ const prepareContent = (raw) => {
     Array.isArray(next.categories) && next.categories.length
       ? [...new Set(next.categories.filter(Boolean))]
       : projectCategories;
-  next.projects = next.projects.map((project) => ({
-    ...project,
-    // Os projetos antigos continuam válidos e entram como projetos próprios.
-    projectType:
-      project.projectType === "collaboration" ? "collaboration" : "own",
-    collaborationWith: project.collaborationWith || "",
-    gallery: normaliseGallery(project.gallery),
-  }));
+  let hasFeaturedProject = false;
+  next.projects = next.projects.map((project) => {
+    const featured = Boolean(project.featured) && !hasFeaturedProject;
+    hasFeaturedProject ||= featured;
+
+    return {
+      ...project,
+      // Os projetos antigos continuam válidos e entram como projetos próprios.
+      projectType:
+        project.projectType === "collaboration" ? "collaboration" : "own",
+      collaborationWith: project.collaborationWith || "",
+      gallery: normaliseGallery(project.gallery),
+      featured,
+    };
+  });
 
   return next;
 };
@@ -191,6 +198,17 @@ export default function Admin() {
             ? updater(p)
             : updater
           : p,
+      ),
+    }));
+  const setFeaturedProject = (featured) =>
+    setContent((current) => ({
+      ...current,
+      projects: current.projects.map((item) =>
+        item.id === selected
+          ? { ...item, featured }
+          : featured
+            ? { ...item, featured: false }
+            : item,
       ),
     }));
   const commit = async () => {
@@ -656,12 +674,7 @@ export default function Admin() {
                       <input
                         type="checkbox"
                         checked={project.featured}
-                        onChange={(e) =>
-                          setProject((p) => ({
-                            ...p,
-                            featured: e.target.checked,
-                          }))
-                        }
+                        onChange={(e) => setFeaturedProject(e.target.checked)}
                       />
                     </label>
                   </div>
@@ -1063,23 +1076,6 @@ export default function Admin() {
                         settings: {
                           ...c.settings,
                           contactHeading: e.target.value,
-                        },
-                      }))
-                    }
-                  />
-                </label>
-                <label>
-                  Texto de introdução ao formulário
-                  <textarea
-                    rows="3"
-                    value={content.settings.contactIntro || ""}
-                    placeholder="Conta-nos um pouco sobre o projeto."
-                    onChange={(e) =>
-                      setContent((c) => ({
-                        ...c,
-                        settings: {
-                          ...c.settings,
-                          contactIntro: e.target.value,
                         },
                       }))
                     }

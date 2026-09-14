@@ -7,14 +7,13 @@ const sections = [
   {
     value: "own",
     label: "Autoria",
-    description:
-      "Projetos em autoria ou coautoria da Pinho Arquitetura.",
+    description: "Projetos da autoria da Pinho Arquitetura.",
   },
   {
     value: "collaboration",
     label: "Colaborações",
     description:
-      "Projetos desenvolvidos em colaboração com outros ateliers e arquitetos.",
+      "Projetos desenvolvidos em colaboração com outros gabinetes e arquitetos.",
   },
 ];
 

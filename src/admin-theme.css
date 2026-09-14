@@ -262,6 +262,10 @@
   background: var(--admin-ink);
 }
 
+.admin-project-row.active b {
+  color: var(--admin-cream);
+}
+
 .admin-project-row img {
   width: 66px;
   height: 54px;

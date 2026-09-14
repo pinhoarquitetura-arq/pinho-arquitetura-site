@@ -12,8 +12,6 @@ export default function About() {
           >
             Sobre nós
           </motion.h1>
-
-          <p>Arquitetura, do conceito à obra.</p>
         </div>
       </section>
 

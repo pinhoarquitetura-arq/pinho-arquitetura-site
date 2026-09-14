@@ -56,28 +56,7 @@ export default function Services() {
           >
             Serviços
           </motion.h1>
-
-          <p>Arquitetura, do conceito à obra.</p>
         </div>
-      </section>
-
-      <section className="about-v2-statement section-pad">
-        <span className="section-index">
-          A ABORDAGEM
-        </span>
-
-        <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          Espaços claros, funcionais e coerentes.
-          <br />
-          Uma linguagem contemporânea com
-          <br />
-          atenção ao <em>detalhe.</em>
-        </motion.p>
       </section>
 
       <section className="about-v2-process section-pad">
@@ -121,8 +100,6 @@ export default function Services() {
           <span className="section-index">
             02 — SERVIÇOS
           </span>
-
-          <h2>O que fazemos</h2>
         </div>
 
         <div className="about-v2-services-grid">
@@ -156,9 +133,26 @@ export default function Services() {
         </div>
       </section>
 
+      <section className="about-v2-statement section-pad">
+        <span className="section-index">03 — A ABORDAGEM</span>
+
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          Espaços claros, funcionais e coerentes.
+          <br />
+          Uma linguagem contemporânea com
+          <br />
+          atenção ao <em>detalhe.</em>
+        </motion.p>
+      </section>
+
       <section className="about-v2-contact section-pad">
         <span className="section-index">
-          03 — CONTACTO
+          04 — CONTACTO
         </span>
 
         <div>
