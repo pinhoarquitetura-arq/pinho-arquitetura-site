@@ -47,25 +47,27 @@ export default function Home() {
         </section>
       )}
 
-      <section className="manifesto-grid section-pad">
-        <span className="section-index">
-          01 — SOBRE NÓS
-        </span>
+      {!loading && (
+        <section className="manifesto-grid section-pad">
+          <span className="section-index">
+            01 — SOBRE NÓS
+          </span>
 
-        <div>
-          <p className="big-copy">
-            {renderIntro(content.settings.intro)}
-          </p>
+          <div>
+            <p className="big-copy">
+              {renderIntro(content.settings.intro)}
+            </p>
 
-          <Link
-            className="text-link"
-            to="/sobre-nos"
-          >
-            Saber mais
-            <ArrowUpRight size={17} />
-          </Link>
-        </div>
-      </section>
+            <Link
+              className="text-link"
+              to="/sobre-nos"
+            >
+              Saber mais
+              <ArrowUpRight size={17} />
+            </Link>
+          </div>
+        </section>
+      )}
 
       <section className="contact-cta section-pad">
         <span className="section-index">
@@ -76,7 +78,7 @@ export default function Home() {
           <h2>
             Um projeto começa
             <br />
-            com uma conversa.
+            com uma <em>conversa.</em>
           </h2>
 
           <Link

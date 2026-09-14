@@ -215,6 +215,10 @@ textarea {
   letter-spacing: -0.045em;
   margin: 0 0 40px;
 }
+.big-copy em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
 .text-link {
   display: inline-flex;
   align-items: center;
@@ -326,6 +330,10 @@ textarea {
     sans-serif;
   letter-spacing: -0.055em;
   margin: 0 0 48px;
+}
+.contact-cta h2 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
 }
 .cta-pill {
   display: inline-flex;
