@@ -37,13 +37,23 @@ const normaliseContent = (value) => ({
   },
   categories: Array.isArray(value?.categories) ? value.categories : [],
   projects: (Array.isArray(value?.projects) ? value.projects : []).map(
-    (project, index, projects) => ({
-      ...project,
-      // Mantém apenas o primeiro projeto marcado como destaque.
-      featured:
-        Boolean(project.featured) &&
-        !projects.slice(0, index).some((item) => item.featured),
-    }),
+    (project, index, projects) => {
+      const categories = Array.isArray(project.categories)
+        ? [...new Set(project.categories.filter(Boolean))]
+        : project.category
+          ? [project.category]
+          : [];
+
+      return {
+        ...project,
+        category: categories[0] || "",
+        categories,
+        // Mantém apenas o primeiro projeto marcado como destaque.
+        featured:
+          Boolean(project.featured) &&
+          !projects.slice(0, index).some((item) => item.featured),
+      };
+    },
   ),
 });
 

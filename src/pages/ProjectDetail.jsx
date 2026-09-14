@@ -74,7 +74,11 @@ export default function ProjectDetail() {
           <div className="project-title-facts">
             <span>{project.location}</span>
             <span>{project.year}</span>
-            <span>{project.category}</span>
+            <span>
+              {Array.isArray(project.categories)
+                ? project.categories.join(" · ")
+                : project.category}
+            </span>
             <span>{project.status}</span>
             {project.projectType === "collaboration" && (
               <span className="project-collaboration">

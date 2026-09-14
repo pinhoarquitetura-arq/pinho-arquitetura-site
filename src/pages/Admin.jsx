@@ -50,7 +50,11 @@ const prepareContent = (raw) => {
   const next = clone(raw);
   const projectCategories = [
     ...new Set(
-      next.projects.map((project) => project.category).filter(Boolean),
+      next.projects.flatMap((project) =>
+        Array.isArray(project.categories)
+          ? project.categories
+          : [project.category],
+      ).filter(Boolean),
     ),
   ];
 
@@ -70,6 +74,14 @@ const prepareContent = (raw) => {
         project.projectType === "collaboration" ? "collaboration" : "own",
       collaborationWith: project.collaborationWith || "",
       gallery: normaliseGallery(project.gallery),
+      category: Array.isArray(project.categories)
+        ? project.categories[0] || ""
+        : project.category || "",
+      categories: Array.isArray(project.categories)
+        ? [...new Set(project.categories.filter(Boolean))]
+        : project.category
+          ? [project.category]
+          : [],
       featured,
     };
   });
@@ -234,6 +246,7 @@ export default function Admin() {
       location: "Aveiro, Portugal",
       year: new Date().getFullYear().toString(),
       category: content.categories[0] || "",
+      categories: content.categories[0] ? [content.categories[0]] : [],
       projectType: "own",
       collaborationWith: "",
       status: "Estudo",
@@ -307,7 +320,15 @@ export default function Admin() {
         position === index ? name : category,
       ),
       projects: current.projects.map((item) =>
-        item.category === previous ? { ...item, category: name } : item,
+        item.categories?.includes(previous)
+          ? {
+              ...item,
+              category: item.category === previous ? name : item.category,
+              categories: item.categories.map((category) =>
+                category === previous ? name : category,
+              ),
+            }
+          : item,
       ),
     }));
   };
@@ -315,7 +336,7 @@ export default function Admin() {
   const deleteCategory = (index) => {
     const category = content.categories[index];
     const projectsUsingCategory = content.projects.filter(
-      (item) => item.category === category,
+      (item) => item.categories?.includes(category),
     ).length;
     const message = projectsUsingCategory
       ? `A categoria “${category}” está associada a ${projectsUsingCategory} projeto(s). Ao apagá-la, esses projetos ficam sem categoria. Continuar?`
@@ -328,7 +349,13 @@ export default function Admin() {
         (_, position) => position !== index,
       ),
       projects: current.projects.map((item) =>
-        item.category === category ? { ...item, category: "" } : item,
+        item.categories?.includes(category)
+          ? {
+              ...item,
+              category: item.category === category ? "" : item.category,
+              categories: item.categories.filter((itemCategory) => itemCategory !== category),
+            }
+          : item,
       ),
     }));
   };
@@ -558,7 +585,11 @@ export default function Admin() {
                       {p.projectType === "collaboration"
                         ? "Colaboração"
                         : "Autoria"}
-                      {p.category ? ` · ${p.category}` : ""}
+                      {(p.categories || []).length
+                        ? ` · ${p.categories.join(", ")}`
+                        : p.category
+                          ? ` · ${p.category}`
+                          : ""}
                     </span>
                   </div>
                 </button>
@@ -641,25 +672,33 @@ export default function Admin() {
                         />
                       </label>
                     )}
-                    <label>
-                      Categoria
-                      <select
-                        value={project.category}
-                        onChange={(e) =>
-                          setProject((p) => ({
-                            ...p,
-                            category: e.target.value,
-                          }))
-                        }
-                      >
-                        <option value="">Sem categoria</option>
-                        {content.categories.map((category) => (
-                          <option key={category} value={category}>
-                            {category}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
+                    <fieldset className="project-category-options">
+                      <legend>Categorias</legend>
+                      {content.categories.map((category) => (
+                        <label key={category}>
+                          <input
+                            type="checkbox"
+                            checked={project.categories?.includes(category)}
+                            onChange={(event) =>
+                              setProject((current) => {
+                                const categories = event.target.checked
+                                  ? [...(current.categories || []), category]
+                                  : (current.categories || []).filter(
+                                      (item) => item !== category,
+                                    );
+
+                                return {
+                                  ...current,
+                                  categories,
+                                  category: categories[0] || "",
+                                };
+                              })
+                            }
+                          />
+                          {category}
+                        </label>
+                      ))}
+                    </fieldset>
                     <label>
                       Estado
                       <input
@@ -959,7 +998,7 @@ export default function Admin() {
                     <span>
                       {
                         content.projects.filter(
-                          (item) => item.category === category,
+                          (item) => item.categories?.includes(category),
                         ).length
                       }{" "}
                       projeto(s)

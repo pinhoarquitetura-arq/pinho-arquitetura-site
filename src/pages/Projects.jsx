@@ -22,6 +22,13 @@ const getProjectType = (project) =>
     ? "collaboration"
     : "own";
 
+const getProjectCategories = (project) =>
+  Array.isArray(project.categories)
+    ? project.categories
+    : project.category
+      ? [project.category]
+      : [];
+
 const getCategories = (content) => {
   if (
     Array.isArray(content.categories) &&
@@ -33,7 +40,7 @@ const getCategories = (content) => {
   return [
     ...new Set(
       content.projects
-        .map((project) => project.category)
+        .flatMap(getProjectCategories)
         .filter(Boolean),
     ),
   ];
@@ -63,7 +70,7 @@ export default function Projects() {
       allCategories.filter((category) =>
         sectionProjects.some(
           (project) =>
-            project.category === category,
+            getProjectCategories(project).includes(category),
         ),
       ),
     [allCategories, sectionProjects],
@@ -77,7 +84,7 @@ export default function Projects() {
         ? sectionProjects
         : sectionProjects.filter(
             (project) =>
-              project.category === filter,
+              getProjectCategories(project).includes(filter),
           ),
     [filter, sectionProjects],
   );
