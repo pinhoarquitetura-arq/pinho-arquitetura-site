@@ -60,7 +60,7 @@ export default function Projects() {
     () =>
       content.projects.filter(
         (project) =>
-          getProjectType(project) === section,
+          project.visible !== false && getProjectType(project) === section,
       ),
     [content.projects, section],
   );
@@ -93,12 +93,12 @@ export default function Projects() {
     () => ({
       own: content.projects.filter(
         (project) =>
-          getProjectType(project) === "own",
+          project.visible !== false && getProjectType(project) === "own",
       ).length,
 
       collaboration: content.projects.filter(
         (project) =>
-          getProjectType(project) ===
+          project.visible !== false && getProjectType(project) ===
           "collaboration",
       ).length,
     }),
@@ -135,7 +135,7 @@ export default function Projects() {
         </motion.h1>
 
         <p>
-          {content.projects.length
+          {content.projects.filter((project) => project.visible !== false).length
             .toString()
             .padStart(2, "0")}{" "}
           projetos

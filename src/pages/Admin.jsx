@@ -5,6 +5,7 @@ import {
   ChevronDown,
   ChevronUp,
   Eye,
+  EyeOff,
   GripVertical,
   ImagePlus,
   LayoutGrid,
@@ -74,6 +75,7 @@ const prepareContent = (raw) => {
         project.projectType === "collaboration" ? "collaboration" : "own",
       collaborationWith: project.collaborationWith || "",
       gallery: normaliseGallery(project.gallery),
+      visible: project.visible !== false,
       category: Array.isArray(project.categories)
         ? project.categories[0] || ""
         : project.category || "",
@@ -251,6 +253,7 @@ export default function Admin() {
       collaborationWith: "",
       status: "Estudo",
       featured: false,
+      visible: true,
       cover:
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=86",
       gallery: [],
@@ -574,7 +577,7 @@ export default function Admin() {
               {content.projects.map((p) => (
                 <button
                   key={p.id}
-                  className={`admin-project-row ${selected === p.id ? "active" : ""}`}
+                  className={`admin-project-row ${selected === p.id ? "active" : ""} ${p.visible === false ? "is-hidden" : ""}`}
                   onClick={() => setSelected(p.id)}
                 >
                   <img src={p.cover} />
@@ -590,6 +593,7 @@ export default function Admin() {
                         : p.category
                           ? ` · ${p.category}`
                           : ""}
+                      {p.visible === false ? " · Oculto" : ""}
                     </span>
                   </div>
                 </button>
@@ -600,9 +604,24 @@ export default function Admin() {
                 <div className="editor-section">
                   <div className="editor-heading">
                     <h2>Informação principal</h2>
-                    <button className="danger-link" onClick={delProject}>
-                      <Trash2 size={15} /> Apagar projeto
-                    </button>
+                    <div className="editor-heading-actions">
+                      <button
+                        type="button"
+                        className="visibility-link"
+                        onClick={() =>
+                          setProject((current) => ({
+                            ...current,
+                            visible: current.visible === false,
+                          }))
+                        }
+                      >
+                        {project.visible === false ? <Eye size={15} /> : <EyeOff size={15} />}
+                        {project.visible === false ? "Mostrar projeto" : "Ocultar projeto"}
+                      </button>
+                      <button className="danger-link" onClick={delProject}>
+                        <Trash2 size={15} /> Apagar projeto
+                      </button>
+                    </div>
                   </div>
                   <div className="form-grid two">
                     <label>

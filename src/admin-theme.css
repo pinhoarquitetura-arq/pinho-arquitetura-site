@@ -266,6 +266,27 @@
   color: var(--admin-cream) !important;
 }
 
+.admin-project-row.is-hidden:not(.active) {
+  opacity: 0.52;
+}
+
+.editor-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.visibility-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--admin-ink);
+  cursor: pointer;
+  font-size: 11px;
+}
+
 .project-category-options {
   display: flex;
   flex-wrap: wrap;

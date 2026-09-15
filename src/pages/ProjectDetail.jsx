@@ -39,7 +39,9 @@ export default function ProjectDetail() {
   const { id } = useParams();
   const { content, loading } = useContent();
 
-  const project = content.projects.find((item) => item.id === id);
+  const project = content.projects.find(
+    (item) => item.id === id && item.visible !== false,
+  );
 
   if (loading) {
     return <section className="section-pad page-top" aria-busy="true" />;
@@ -54,8 +56,9 @@ export default function ProjectDetail() {
     );
   }
 
-  const index = content.projects.findIndex((item) => item.id === project.id);
-  const next = content.projects[(index + 1) % content.projects.length];
+  const visibleProjects = content.projects.filter((item) => item.visible !== false);
+  const index = visibleProjects.findIndex((item) => item.id === project.id);
+  const next = visibleProjects[(index + 1) % visibleProjects.length];
   const gallery = (project.gallery || []).map(normaliseGalleryItem);
 
   return (

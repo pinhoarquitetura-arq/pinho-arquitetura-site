@@ -21,7 +21,7 @@ export default function Home() {
   const { content, loading } = useContent();
 
   const featured = content.projects
-    .filter((project) => project.featured)
+    .filter((project) => project.featured && project.visible !== false)
     .slice(0, 1);
 
   return (

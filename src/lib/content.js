@@ -48,6 +48,7 @@ const normaliseContent = (value) => ({
         ...project,
         category: categories[0] || "",
         categories,
+        visible: project.visible !== false,
         // Mantém apenas o primeiro projeto marcado como destaque.
         featured:
           Boolean(project.featured) &&
