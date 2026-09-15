@@ -169,13 +169,30 @@ export default function ProjectDetail() {
       )}
 
       {project.drawings?.length > 0 && (
-        <section className="detail-info-section section-pad">
-          <h2>Drawings</h2>
-          <div className="media-grid">
-            {project.drawings.map((item, itemIndex) => (
-              <MediaBlock key={itemIndex} item={item} label="DRAWING" />
-            ))}
-          </div>
+        <section className="gallery drawings-gallery section-pad">
+          {project.drawings.map((item, itemIndex) => {
+            const src = item.src || item.image;
+
+            return (
+              <motion.figure
+                key={item.id || itemIndex}
+                className={`gallery-${item.size || "wide"} ${item.size !== "wide" && itemIndex % 2 === 1 ? "gallery-align-right" : ""}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-5%" }}
+                transition={{ duration: 0.65 }}
+              >
+                <button
+                  type="button"
+                  className="gallery-image-button"
+                  onClick={() => setSelectedImage({ src })}
+                  aria-label={`Ampliar desenho ${itemIndex + 1} de ${project.title}`}
+                >
+                  <img src={src} alt={`Desenho ${itemIndex + 1} de ${project.title}`} />
+                </button>
+              </motion.figure>
+            );
+          })}
         </section>
       )}
 

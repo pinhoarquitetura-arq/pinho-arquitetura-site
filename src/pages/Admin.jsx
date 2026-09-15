@@ -142,6 +142,8 @@ export default function Admin() {
   const [authError, setAuthError] = useState("");
   const [newCategory, setNewCategory] = useState("");
   const [draggedPhoto, setDraggedPhoto] = useState(null);
+  const [draggedDrawing, setDraggedDrawing] = useState(null);
+  const [draggedProject, setDraggedProject] = useState(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -391,6 +393,33 @@ export default function Admin() {
         position === index ? { ...item, size } : item,
       ),
     }));
+  const moveDrawing = (from, to) => {
+    if (from === null || from === to) return;
+    setProject((current) => {
+      const drawings = [...(current.drawings || [])];
+      const [moved] = drawings.splice(from, 1);
+      drawings.splice(to, 0, moved);
+      return { ...current, drawings };
+    });
+    setDraggedDrawing(null);
+  };
+  const updateDrawingSize = (index, size) =>
+    setProject((current) => ({
+      ...current,
+      drawings: current.drawings.map((item, position) =>
+        position === index ? { ...item, size } : item,
+      ),
+    }));
+  const moveProject = (from, to) => {
+    if (from === null || from === to) return;
+    setContent((current) => {
+      const projects = [...current.projects];
+      const [moved] = projects.splice(from, 1);
+      projects.splice(to, 0, moved);
+      return { ...current, projects };
+    });
+    setDraggedProject(null);
+  };
 
   if (!authReady || loading) {
     return (
@@ -574,11 +603,17 @@ export default function Admin() {
               <button className="add-project" onClick={addProject}>
                 <Plus size={17} /> Novo projeto
               </button>
-              {content.projects.map((p) => (
+              {content.projects.map((p, index) => (
                 <button
                   key={p.id}
                   className={`admin-project-row ${selected === p.id ? "active" : ""} ${p.visible === false ? "is-hidden" : ""}`}
                   onClick={() => setSelected(p.id)}
+                  draggable
+                  title="Arrasta para alterar a ordem"
+                  onDragStart={() => setDraggedProject(index)}
+                  onDragEnd={() => setDraggedProject(null)}
+                  onDragOver={(event) => event.preventDefault()}
+                  onDrop={() => moveProject(draggedProject, index)}
                 >
                   <img src={p.cover} />
                   <div>
@@ -885,7 +920,84 @@ export default function Admin() {
                   </div>
                 ))}
 
-                {["drawings", "models"].map((key) => (
+                <div className="editor-section">
+                  <div className="editor-heading">
+                    <h2>Drawings</h2>
+                    <FilePicker
+                      multiple
+                      onValue={(images) =>
+                        setProject((current) => ({
+                          ...current,
+                          drawings: [
+                            ...(current.drawings || []),
+                            ...images.map((src, index) => ({
+                              id: `desenho-${Date.now()}-${index}`,
+                              src,
+                              size: "wide",
+                            })),
+                          ],
+                        }))
+                      }
+                    />
+                  </div>
+                  <p className="gallery-admin-help">
+                    Arrasta os desenhos para definir a ordem e escolhe o formato.
+                  </p>
+                  <div className="gallery-admin-grid">
+                    {project.drawings?.map((item, index) => {
+                      const src = item.src || item.image;
+
+                      return (
+                        <div
+                          className={`gallery-admin-item gallery-admin-item--${item.size || "wide"} ${draggedDrawing === index ? "is-dragging" : ""}`}
+                          key={item.id || index}
+                          draggable
+                          onDragStart={() => setDraggedDrawing(index)}
+                          onDragEnd={() => setDraggedDrawing(null)}
+                          onDragOver={(event) => event.preventDefault()}
+                          onDrop={() => moveDrawing(draggedDrawing, index)}
+                        >
+                          <div className="gallery-admin-image">
+                            {src ? <img src={src} alt="" /> : <div className="mini-placeholder">Sem imagem</div>}
+                            <span className="gallery-drag-handle">
+                              <GripVertical size={17} /> Arrastar
+                            </span>
+                            <button
+                              className="gallery-delete"
+                              title="Apagar desenho"
+                              onClick={() =>
+                                setProject((current) => ({
+                                  ...current,
+                                  drawings: current.drawings.filter((_, position) => position !== index),
+                                }))
+                              }
+                            >
+                              <Trash2 size={15} />
+                            </button>
+                          </div>
+                          <div className="gallery-size-picker">
+                            {[
+                              ["wide", RectangleHorizontal, "Grande"],
+                              ["narrow", LayoutGrid, "Média"],
+                              ["portrait", RectangleVertical, "Vertical"],
+                            ].map(([size, Icon, label]) => (
+                              <button
+                                key={size}
+                                type="button"
+                                className={(item.size || "wide") === size ? "active" : ""}
+                                onClick={() => updateDrawingSize(index, size)}
+                              >
+                                <Icon size={15} /> {label}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {['models'].map((key) => (
                   <div className="editor-section" key={key}>
                     <div className="editor-heading">
                       <h2>{key === "drawings" ? "Drawings" : "Models"}</h2>

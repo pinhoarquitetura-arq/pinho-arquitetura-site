@@ -270,6 +270,14 @@
   opacity: 0.52;
 }
 
+.admin-project-row[draggable="true"] {
+  cursor: grab;
+}
+
+.admin-project-row[draggable="true"]:active {
+  cursor: grabbing;
+}
+
 .editor-heading-actions {
   display: flex;
   align-items: center;
