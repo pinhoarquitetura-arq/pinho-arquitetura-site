@@ -2748,33 +2748,85 @@ textarea {
   object-fit: contain !important;
 }
 
-/* Galeria com duas imagens por linha */
+/* A galeria respeita o formato escolhido no admin. */
 
 .project-detail .gallery {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
   gap: clamp(16px, 2vw, 30px) !important;
   align-items: start;
 }
 
-.project-detail .gallery > figure,
-.project-detail .gallery .gallery-wide,
-.project-detail .gallery .gallery-narrow,
-.project-detail .gallery .gallery-align-right {
-  grid-column: auto !important;
+.project-detail .gallery > figure {
+  grid-column: 1 / -1;
   width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
   justify-self: stretch !important;
 }
 
+.project-detail .gallery > figure.gallery-narrow {
+  grid-column: span 8;
+}
+
+.project-detail .gallery > figure.gallery-portrait {
+  grid-column: span 5;
+}
+
+.project-detail .gallery > figure.gallery-align-right {
+  grid-column-end: -1;
+}
+
+.gallery-image-button {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
 .project-detail .gallery figure img {
   display: block;
   width: 100%;
   height: auto !important;
-  max-height: 620px;
-  object-fit: contain !important;
-  background: #ebe7df;
+  max-height: 900px;
+  object-fit: cover !important;
+}
+
+.image-lightbox {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 40px;
+  background: rgba(12, 12, 12, 0.92);
+  cursor: zoom-out;
+}
+
+.image-lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  cursor: default;
+}
+
+.image-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  background: transparent;
+  color: white;
+  cursor: pointer;
 }
 
 /* Telemóvel */

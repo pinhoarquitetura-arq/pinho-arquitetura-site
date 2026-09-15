@@ -89,7 +89,7 @@ export default function Home() {
 
           <Link
             to="/contactos"
-            className="cta-pill"
+            className="text-link"
           >
             Fale connosco
             <ArrowUpRight size={18} />

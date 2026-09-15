@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useContent } from "../hooks/useContent";
 
@@ -38,6 +39,7 @@ const normaliseGalleryItem = (item, index) =>
 export default function ProjectDetail() {
   const { id } = useParams();
   const { content, loading } = useContent();
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const project = content.projects.find(
     (item) => item.id === id && item.visible !== false,
@@ -130,10 +132,41 @@ export default function ProjectDetail() {
             viewport={{ once: true, margin: "-5%" }}
             transition={{ duration: 0.65 }}
           >
+          <button
+            type="button"
+            className="gallery-image-button"
+            onClick={() => setSelectedImage(item)}
+            aria-label={`Ampliar imagem ${photoIndex + 1} de ${project.title}`}
+          >
             <img src={item.src} alt={`${project.title} ${photoIndex + 1}`} />
-          </motion.figure>
-        ))}
+          </button>
+        </motion.figure>
+      ))}
       </section>
+
+      {selectedImage && (
+        <div
+          className="image-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Imagem ampliada"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            type="button"
+            className="image-lightbox-close"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Fechar imagem ampliada"
+          >
+            <X size={22} />
+          </button>
+          <img
+            src={selectedImage.src}
+            alt={selectedImage.title || project.title}
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
 
       {project.drawings?.length > 0 && (
         <section className="detail-info-section section-pad">
