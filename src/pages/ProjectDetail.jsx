@@ -170,6 +170,7 @@ export default function ProjectDetail() {
 
       {project.drawings?.length > 0 && (
         <section className="gallery drawings-gallery section-pad">
+          <h2>Desenhos</h2>
           {project.drawings.map((item, itemIndex) => {
             const src = item.src || item.image;
 

@@ -448,11 +448,11 @@ textarea {
 }
 .project-title-grid h1 {
   font:
-    700 clamp(56px, 8vw, 125px)/0.9 Manrope,
+    700 clamp(48px, 6vw, 96px)/0.9 Manrope,
     sans-serif;
   letter-spacing: -0.055em;
   margin: 0;
-  text-transform: uppercase;
+  text-transform: none;
 }
 .project-title-facts {
   display: grid;
@@ -513,7 +513,7 @@ textarea {
   object-fit: cover;
 }
 .gallery figure.gallery-narrow {
-  grid-column: span 8;
+  grid-column: span 6;
 }
 .gallery figure.gallery-portrait {
   grid-column: span 5;
@@ -2766,7 +2766,7 @@ textarea {
 }
 
 .project-detail .gallery > figure.gallery-narrow {
-  grid-column: span 8;
+  grid-column: span 6;
 }
 
 .project-detail .gallery > figure.gallery-portrait {
@@ -2775,6 +2775,33 @@ textarea {
 
 .project-detail .gallery > figure.gallery-align-right {
   grid-column-end: -1;
+}
+
+.project-detail .drawings-gallery {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+}
+
+.drawings-gallery > h2 {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+  font: 400 24px/1 Manrope, sans-serif;
+  letter-spacing: -0.035em;
+}
+
+.project-detail .drawings-gallery > figure,
+.project-detail .drawings-gallery > figure.gallery-narrow,
+.project-detail .drawings-gallery > figure.gallery-portrait {
+  grid-column: auto;
+}
+
+.project-detail .drawings-gallery .gallery-image-button {
+  aspect-ratio: 1.4 / 1;
+  background: #ebe7df;
+}
+
+.project-detail .drawings-gallery figure img {
+  height: 100% !important;
+  object-fit: contain !important;
 }
 
 .gallery-image-button {
@@ -2849,6 +2876,10 @@ textarea {
 
   .project-detail .gallery figure img {
     max-height: none;
+  }
+
+  .project-detail .drawings-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
