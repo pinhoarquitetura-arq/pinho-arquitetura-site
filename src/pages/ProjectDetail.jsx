@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, X } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useContent } from "../hooks/useContent";
 
@@ -135,7 +135,7 @@ export default function ProjectDetail() {
           <button
             type="button"
             className="gallery-image-button"
-            onClick={() => setSelectedImage(item)}
+            onClick={() => setSelectedImage({ items: gallery, index: photoIndex })}
             aria-label={`Ampliar imagem ${photoIndex + 1} de ${project.title}`}
           >
             <img src={item.src} alt={`${project.title} ${photoIndex + 1}`} />
@@ -160,11 +160,43 @@ export default function ProjectDetail() {
           >
             <X size={22} />
           </button>
+          {selectedImage.items.length > 1 && (
+            <button
+              type="button"
+              className="image-lightbox-nav image-lightbox-nav--previous"
+              onClick={(event) => {
+                event.stopPropagation();
+                setSelectedImage((current) => ({
+                  ...current,
+                  index: (current.index - 1 + current.items.length) % current.items.length,
+                }));
+              }}
+              aria-label="Imagem anterior"
+            >
+              <ChevronLeft size={26} />
+            </button>
+          )}
           <img
-            src={selectedImage.src}
-            alt={selectedImage.title || project.title}
+            src={selectedImage.items[selectedImage.index].src}
+            alt={selectedImage.items[selectedImage.index].title || project.title}
             onClick={(event) => event.stopPropagation()}
           />
+          {selectedImage.items.length > 1 && (
+            <button
+              type="button"
+              className="image-lightbox-nav image-lightbox-nav--next"
+              onClick={(event) => {
+                event.stopPropagation();
+                setSelectedImage((current) => ({
+                  ...current,
+                  index: (current.index + 1) % current.items.length,
+                }));
+              }}
+              aria-label="Imagem seguinte"
+            >
+              <ChevronRight size={26} />
+            </button>
+          )}
         </div>
       )}
 
@@ -186,7 +218,15 @@ export default function ProjectDetail() {
                 <button
                   type="button"
                   className="gallery-image-button"
-                  onClick={() => setSelectedImage({ src })}
+                  onClick={() =>
+                    setSelectedImage({
+                      items: project.drawings.map((drawing) => ({
+                        ...drawing,
+                        src: drawing.src || drawing.image,
+                      })),
+                      index: itemIndex,
+                    })
+                  }
                   aria-label={`Ampliar desenho ${itemIndex + 1} de ${project.title}`}
                 >
                   <img src={src} alt={`Desenho ${itemIndex + 1} de ${project.title}`} />
