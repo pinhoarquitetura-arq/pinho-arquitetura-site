@@ -155,8 +155,8 @@ export default function Contact() {
         <aside className="contact-details">
           <img
             className="contact-monogram"
-            src="/logos/monograma-transparente.png"
-            alt=""
+            src="/logos/logo-horizontal-cor.png"
+            alt="Pinho Arquitetura"
           />
           <span className="section-index">CONTACTO</span>
           <div className="contact-list">

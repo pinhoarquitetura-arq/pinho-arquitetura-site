@@ -9,7 +9,11 @@ export default function Footer() {
           to="/"
           aria-label="Pinho Arquitetura — Página inicial"
         >
-          PINHO ARQUITETURA
+          <img
+            className="footer-brand-logo"
+            src="/logos/logo-horizontal-cor.png"
+            alt="Pinho Arquitetura"
+          />
         </Link>
 
         <p className="footer-services-line">
