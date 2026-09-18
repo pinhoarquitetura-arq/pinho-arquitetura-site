@@ -11,7 +11,7 @@ export default function Footer() {
         >
           <img
             className="footer-brand-logo"
-            src="/logos/logo-horizontal-cor.png"
+            src="/logos/PINHO.svg"
             alt="Pinho Arquitetura"
           />
         </Link>

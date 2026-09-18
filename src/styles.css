@@ -799,8 +799,7 @@ textarea {
   font-size: 12px;
 }
 .contact-details {
-  position: sticky;
-  top: 120px;
+  position: static;
   padding-top: 8px;
 }
 .contact-details .contact-monogram {
